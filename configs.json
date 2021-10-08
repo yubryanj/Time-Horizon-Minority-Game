@@ -1,0 +1,20 @@
+{
+    "default":{
+        "n_agents": 31,
+        "actions": [-1,1],
+        "n_strategies": 2,
+        "memory": 2,
+        "max_steps": 200000,
+        "tau": 5000,
+        "THMG_horizon": 3000
+    },
+    "debug":{
+        "n_agents": 2,
+        "actions": [-1,1],
+        "n_strategies": 2,
+        "memory": 1,
+        "max_steps": 10,
+        "tau": 3,
+        "THMG_horizon": 3
+    }
+}
