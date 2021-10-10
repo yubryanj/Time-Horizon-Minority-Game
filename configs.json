@@ -2,19 +2,19 @@
     "default":{
         "n_agents": 31,
         "actions": [-1,1],
-        "n_strategies": 2,
-        "memory": 2,
-        "max_steps": 200000,
+        "n_strategies": 6,
+        "memory": 4,
+        "max_steps": 20000,
         "tau": 5000,
         "THMG_horizon": 3000
     },
     "debug":{
-        "n_agents": 2,
+        "n_agents": 20,
         "actions": [-1,1],
-        "n_strategies": 2,
-        "memory": 1,
-        "max_steps": 10,
-        "tau": 3,
-        "THMG_horizon": 3
+        "n_strategies": 10,
+        "memory": 10,
+        "max_steps": 200,
+        "tau": 25,
+        "THMG_horizon": 50
     }
 }

@@ -1,9 +1,7 @@
 from abc import ABC, abstractmethod
-from collections import deque
-from typing import Deque
 import numpy as np
 
-class Agent():
+class Agent(ABC):
     def __init__(
             self, 
             configs
@@ -42,8 +40,6 @@ class Random_Agent(Agent):
         return np.random.choice(self.configs['actions'])
 
 
-    
-
 class Optimizing_Agent(Agent):
 
     def __init__(
@@ -65,6 +61,9 @@ class Optimizing_Agent(Agent):
 
         # Initialize the value of each strategy to 0
         self.valuation = np.sum(self.time_horizon,axis=0)
+
+        # Hypothetical Scores
+        self.hypothetical_scores = np.zeros(self.configs.get('n_strategies'))
 
         pass
 
@@ -116,6 +115,9 @@ class Optimizing_Agent(Agent):
                 counterfactual_scores[strategy_id] += 1
             else:
                 counterfactual_scores[strategy_id] -= 1
+
+        # Update the hypothetical score of each strategy
+        self.hypothetical_scores += counterfactual_scores
 
         # after a "reasonable" number of iterations, begin the rolling window of cumulative strategy scores
         if info.get('timestep') > self.configs.get('THMG_horizon'):

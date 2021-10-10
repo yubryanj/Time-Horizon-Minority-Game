@@ -1,8 +1,7 @@
 import gym
 from ray.rllib.env.multi_agent_env import MultiAgentEnv
 import numpy as np
-from gym.spaces import Discrete, Box
-
+from gym.spaces import Box
 
 
 class Minority_Game(MultiAgentEnv):
@@ -17,11 +16,6 @@ class Minority_Game(MultiAgentEnv):
 
         # History of aggregated actions, A = sum_{i=1}^{N}a_{i}(t)
         self.history = []
-
-        # Binary Time Series, D; D(t) = \frac{1}{2}[Sgn(2A-N)+1] \in {0,1}
-        # D = 0 if agent is in the minority
-        # D = 1 otherwise
-        self.in_minority = []
 
         # Agents take actions in [-1,1]
         self.action_space = gym.spaces.Box(
@@ -81,7 +75,8 @@ class Minority_Game(MultiAgentEnv):
         # Increment the timestep counter
         self.timestep += 1
 
-        # Convert the actions into a binary value
+        # Convert the actions into binary value, D
+        # D(t) = \frac{1}{2}[Sgn(2A-N)+1] \in {0,1}
         A = np.sum(actions)
         N = self.configs.get('n_agents')
         D = 0.5 * ( np.sign(2*A-N) + 1 )
