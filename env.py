@@ -98,8 +98,10 @@ class Minority_Game(MultiAgentEnv):
 
         # Return extra info
         info    = {
+            'A': A,
+            'actions': actions,
             'D': D,
-            'timestep': self.timestep
+            'timestep': self.timestep,
             }
 
         return observations, rewards, done, info

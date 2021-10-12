@@ -65,6 +65,9 @@ class Optimizing_Agent(Agent):
         # Hypothetical Scores
         self.hypothetical_scores = np.zeros(self.configs.get('n_strategies'))
 
+        # Counterfactual Scores
+        self.counterfactual_rewards  = np.zeros(self.configs.get('n_strategies'))
+
         pass
 
 
@@ -108,26 +111,32 @@ class Optimizing_Agent(Agent):
         history = int("".join(str(x) for x in observation), 2)
         
         # If a strategy predicted the outcome correctly; it gets +1; -1 otherwise
-        counterfactual_scores = np.zeros(self.configs.get('n_strategies'))
+        counterfactual_rewards = np.zeros(self.configs.get('n_strategies'))
 
+        # Compute the counterfactual reward for each strategy
         for strategy_id, strategy in enumerate(self.strategies):
-            if strategy[history] == info.get('D'):
-                counterfactual_scores[strategy_id] += 1
+
+            if strategy[history] == 1:
+                action = -1
             else:
-                counterfactual_scores[strategy_id] -= 1
+                action = 1
+            
+            counterfactual_rewards[strategy_id] = -np.sign(info.get('A')) * action
 
         # Update the hypothetical score of each strategy
-        self.hypothetical_scores += counterfactual_scores
+        self.hypothetical_scores += counterfactual_rewards
+
+        # Store the most recent counterfactual score
+        self.counterfactual_rewards = counterfactual_rewards
 
         # after a "reasonable" number of iterations, begin the rolling window of cumulative strategy scores
         if info.get('timestep') > self.configs.get('THMG_horizon'):
 
             # Append to the time horizon buffer
-            self.time_horizon[info.get('timestep') % self.configs.get('tau')] = counterfactual_scores
+            self.time_horizon[info.get('timestep') % self.configs.get('tau')] = counterfactual_rewards
 
             # Update the valuation
             self.valuation = np.sum(self.time_horizon, axis=0)
-
 
         pass
 
