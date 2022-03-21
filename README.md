@@ -1,3 +1,3 @@
-# minority_game
+# Time Horizon Minority Game
 
 WRITE ME!
