@@ -6,5 +6,7 @@ A writeup can be found [here](https://github.com/yubryanj/Time-Horizon-Minority-
 
 
 [1] JB Satinover and Didier Sornette. “” Illusion of control” in Time-Horizon Minority and Parrondo Games”. In: The European Physical Journal B 60.3 (2007), pp. 369–384.
+
 [2] Michael L Hart, Paul Jefferies, and Neil F Johnson. “Dynamics of the time horizon minority game”. In: Physica A: Statistical Mechanics and its Applications 311.1-2 (2002), pp. 275–290.
+
 [3] Ellen J Langer. “The illusion of control.” In: Journal of personality and social psychology 32.2 (1975), p. 311.
